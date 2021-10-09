@@ -14,9 +14,7 @@ namespace TVSet
     class TV 
     {
         Random random = new Random();
-        //ChannelTV[] channelTV = new ChannelTV[100];
         ChannelTV[] channelTV;
-        //int channel = 0;
 
         public TV(ChannelTV[] channelTV)
         {
@@ -40,23 +38,5 @@ namespace TVSet
                 channelTV[i].numberChannel = i;
             }
         }
-        //public void NextСhannel()
-        //{
-        //    channel++;
-        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
-        //    Console.WriteLine();
-        //}
-        //public void BackСhannel()
-        //{
-        //    channel--;
-        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
-        //    Console.WriteLine();
-        //}
-        //public void СurrentСhannel(int numberChannel)
-        //{
-        //    channel = numberChannel;
-        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
-        //    Console.WriteLine();
-        //}
     }
 }
