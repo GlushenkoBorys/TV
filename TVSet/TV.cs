@@ -6,50 +6,57 @@ using System.Threading.Tasks;
 
 namespace TVSet
 {
-    class TV
+    struct ChannelTV
     {
-
+        internal string onOff;
+        internal int numberChannel;
+    }
+    class TV 
+    {
         Random random = new Random();
-        string[] channels = new string[20];
-        int channel = 0;
-        public void ChannelMeny()
+        //ChannelTV[] channelTV = new ChannelTV[100];
+        ChannelTV[] channelTV;
+        //int channel = 0;
+
+        public TV(ChannelTV[] channelTV)
         {
-            for (int i = 0; i < channels.Length; i++)
+            this.channelTV = channelTV;
+        }
+        public void Channels()
+        {
+            for (int i = 0; i < channelTV.Length; i++)
             {
                 int randomNumber = random.Next(1, 100);
 
                 if (randomNumber % 2 == 0)
                 {
-                    channels[i] = "On";
+                    channelTV[i].onOff = "On";
                 }
                 else
                 {
-                    channels[i] = "Off";
+                    channelTV[i].onOff = "Off";
                 }
-            }
-            for (int i = 0; i < channels.Length; i++)
-            {
 
-                Console.WriteLine($"{i + 1} {channels[i]}");
+                channelTV[i].numberChannel = i;
             }
-            Console.WriteLine("");
-
         }
-        public void NextСhannel()
-        {
-            channel++;
-            Console.WriteLine($"Канал {channel + 1} {channels[channel]}");
-        }
-        public void BackСhannel()
-        {
-            channel--;
-            Console.WriteLine($"Канал {channel + 1} {channels[channel]}");
-        }
-        public void СurrentСhannel(int numberChannel)
-        {
-            numberChannel--;
-            channel = numberChannel;
-            Console.WriteLine($"Канал {channel + 1} {channels[channel]}");
-        }
+        //public void NextСhannel()
+        //{
+        //    channel++;
+        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
+        //    Console.WriteLine();
+        //}
+        //public void BackСhannel()
+        //{
+        //    channel--;
+        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
+        //    Console.WriteLine();
+        //}
+        //public void СurrentСhannel(int numberChannel)
+        //{
+        //    channel = numberChannel;
+        //    Console.WriteLine($"Канал {channel} {channelTV[channel].onOff}");
+        //    Console.WriteLine();
+        //}
     }
 }
