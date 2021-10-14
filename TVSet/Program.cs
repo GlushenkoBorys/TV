@@ -10,14 +10,12 @@ namespace TVSet
     {
         static void Main(string[] args)
         {
-            ChannelTV[] channelTV = new ChannelTV[100];
-            TV tv = new TV(channelTV);
+            TV tv = new TV(100);
             tv.Channels();
 
-            bool flagChannelStart = false;
-            while (flagChannelStart == false)
+            bool flagChannelOff = false;
+            while (flagChannelOff == false)
             {
-                int channel;
                 Console.WriteLine("Введите номер канала от 0 до 99:");
                 Console.WriteLine("Для пролистывания каналов вперед, нажмите: w");
                 Console.WriteLine("Для пролистывания каналов назад, нажмите: s");
@@ -27,46 +25,19 @@ namespace TVSet
                 switch (way)
                 {
                     case "w":
-                        try
-                        {
-                            Print.NextСhannel(channelTV);
-                        }
-                        catch
-                        {
-                            Print.СurrentСhannel(channelTV, 0);
-                        }
+                        tv.NextСhannel();
                         break;
+
                     case "s":
-                        try
-                        {
-                            Print.BackСhannel(channelTV);
-                        }
-                        catch
-                        {
-                            Print.СurrentСhannel(channelTV, 99);
-                        }
+                        tv.BackСhannel();
                         break;
+
                     case "off":
-                        flagChannelStart = true;
+                        flagChannelOff = true;
                         break;
-                    default:
-                        try
-                        {
-                            channel = Int32.Parse(way);
-                        }
-                        catch
-                        {
-                            channel = -1;
-                        }
-                        if (channel >= 0 && channel < 100)
-                        {
-                            Print.СurrentСhannel(channelTV, channel);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Вы ввели не корректный номер канала");
-                            Console.WriteLine();
-                        }
+
+                    default:                       
+                        tv.SetСhannel(way);                       
                         break;
                 }               
             }
