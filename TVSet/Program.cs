@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TVSet
 {
@@ -10,37 +7,36 @@ namespace TVSet
     {
         static void Main(string[] args)
         {
-            TV tv = new TV(100);
+            SharpTV tv = new SharpTV(100);
             tv.Channels();
 
-            bool flagChannelOff = false;
-            while (flagChannelOff == false)
+            IGettable igtv = tv;
+            IGetButtonable igb = tv;
+
+            tv.SetСhannel(2, 9);
+            int count = 0;
+
+            while (igtv.GetNextChannel())
             {
-                Console.WriteLine("Введите номер канала от 0 до 99:");
-                Console.WriteLine("Для пролистывания каналов вперед, нажмите: w");
-                Console.WriteLine("Для пролистывания каналов назад, нажмите: s");
-                Console.WriteLine("Для выключение телевизора, нажмите: off");
-                Console.WriteLine();
-                string way = Console.ReadLine();
-                switch (way)
+                int currentChannel = igtv.GetChannel();
+                int currentButton = tv.NumberButtonReturn();
+                Console.WriteLine($"Канал {currentChannel}");
+
+                tv.Reset();
+                while (tv.GetNextChannel())
                 {
-                    case "w":
-                        tv.NextСhannel();
-                        break;
-
-                    case "s":
-                        tv.BackСhannel();
-                        break;
-
-                    case "off":
-                        flagChannelOff = true;
-                        break;
-
-                    default:                       
-                        tv.SetСhannel(way);                       
-                        break;
-                }               
+                    count++;
+                    if (currentChannel == igtv.GetChannel())
+                    {
+                        Console.WriteLine($"Кнопка: {igb.NumberButtonReturn()}");
+                    }
+                }
+                Console.WriteLine();
+                igtv.SetNumberButton(currentButton);
             }
+
+            Console.WriteLine(count);
+            Console.ReadKey();
         }
     }    
 }

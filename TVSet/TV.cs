@@ -1,22 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TVSet
 {
-    class TV 
+    abstract class TV 
     {        
-        int [] channelsTV;
-        int channel = 0;
-        int channelTV;
+        protected int [] channelsTV;
+        protected int buttonNumber;
+
+        public int ChannelTV
+        {
+            get
+            {
+                return this.channelsTV[buttonNumber];
+            }
+        }
+
+        public int ButtonNumber
+        {
+            get
+            {
+                return this.buttonNumber;
+            }
+        }
 
         public TV(int n)
         {
             channelsTV = new int[n];
         }
-        public void Channels()
+        public virtual void Channels()
         {
             Random random = new Random();
             for (int i = 0; i < channelsTV.Length; i++)
@@ -26,50 +37,10 @@ namespace TVSet
             }
         }
 
-        public void SetСhannel(string numberChannel)
+        public int NumberChannelReturn()
         {
-
-            int currentChannel = Int32.Parse(numberChannel);
-
-            if (currentChannel >= 0 && currentChannel < 100)
-            {
-                channel = currentChannel;
-                channelTV = channelsTV[channel];
-            }
-            else
-            {
-                Console.WriteLine("Вы ввели некорректный номер канала");
-                Console.WriteLine();
-            }
-            Сhannel();
+            return this.channelsTV[buttonNumber];
         }
 
-        public void NextСhannel()
-        {
-            channel++;
-            if(channel == 100)
-            {
-                channel = 0;
-            }
-            channelTV = channelsTV[channel];         
-            Сhannel();
-        }
-
-        public void BackСhannel()
-        {
-            channel--;
-            if (channel == -1)
-            {
-                channel = 99;
-            }
-            channelTV = channelsTV[channel];
-            Сhannel();
-        }
-
-        public  void Сhannel()
-        {
-            Console.WriteLine($"Канал {channel} '{channelTV}'");
-            Console.WriteLine();
-        }
     }
 }
